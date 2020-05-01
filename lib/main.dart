@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tenlo/pages/cardspage.dart';
-import 'package:tenlo/pages/categorias.dart';
 import 'package:tenlo/pages/inicio.dart';
 import 'package:tenlo/pages/lugares.dart';
+import 'package:tenlo/pages/usuarios.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
                   text: 'Inicio',
                 ),
                 new Tab(
-                  icon: Icon(Icons.category),
-                  text: 'Categorias',
+                  icon: Icon(Icons.supervised_user_circle),
+                  text: 'Usuarios',
                 ),
                 new Tab(
                   icon: Icon(Icons.place),
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             )),
         body: new TabBarView(children: <Widget>[
           new HomePage(),
-          new CategoriasPage(),
+          new UsuariosPage(),
           new LugaresPage(),
           new CardsPage(),
         ]),
