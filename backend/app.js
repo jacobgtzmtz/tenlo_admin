@@ -1,29 +1,24 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const mongoose = require("mongoose");
 const bodyParser = require('body-parser')
 const cors = require('cors');
 
-const PORT = process.env.PORT || 3000;
+//Importar Rutas
+const clientesRoute = require("./routes/clientes");
 
-//import Routes
-const usersRoute = require("./routes/users");
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(require("./controllers/authController"));
 
-//Middlewares
-app.use(cors());
-app.use(bodyParser.json());
-app.use("/users", usersRoute);
-
-//ROUTES
+//Ruta Raíz
 app.get("/", (req, res) => {
   res.send("Estamos en la pagina principal");
 });
 
-//Connect to dB
-mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost:27017/tenlo-db", { useNewUrlParser: true },  () =>
-  console.log("DBconnected")
-);
+//Middlewares
+app.use(cors());
+app.use(bodyParser.json());
+//Usar Rutas secundarias
+app.use("/clientes", clientesRoute);
 
-//How to we start listening to the server
-app.listen(PORT);
+module.exports = app;
