@@ -32,12 +32,12 @@ router.post("/signin", async (req, res) => {
   try {
     const usuarioRegistrado = await Usuario.findOne({ email: req.body.email });
     if (!usuarioRegistrado) {
-      return res.status(400).send("El correo no existe");
+      return res.status(400).send({mensaje: "El correo no existe", auth: false, token: null});
     }
 
     const passwordValido = await usuarioRegistrado.validarPassword(req.body.password, usuarioRegistrado.password);
     if (!passwordValido) {
-      return res.status(401).send({ auth: false, token: null });
+      return res.status(401).send({mensaje:"El correo o la contraseña no coinciden!", auth: false, token: null });
     }
     const token = jwt.sign({ id: Usuario._id }, config.secret, {
       expiresIn: "24h",
