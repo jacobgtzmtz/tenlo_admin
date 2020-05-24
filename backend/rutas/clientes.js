@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Cliente = require("../models/Cliente");
+const Cliente = require("../modelos/Cliente");
 
 //Trae toda la lista de clientes.
 router.get("/", async (req, res) => {
@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
     const Clientes = await Cliente.find();
     res.json(Clientes);
   } catch (err) {
+    console.log(err);
     res.json({ message: err });
   }
 });

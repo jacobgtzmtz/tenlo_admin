@@ -4,11 +4,12 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 
 //Importar Rutas
-const clientesRoute = require("./routes/clientes");
+const rutas = require('./rutas'); 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(require("./controllers/authController"));
+app.use(require('./controladores/authController'));
+app.use("/", rutas);
 
 //Ruta Raíz
 app.get("/", (req, res) => {
@@ -18,7 +19,5 @@ app.get("/", (req, res) => {
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-//Usar Rutas secundarias
-app.use("/clientes", clientesRoute);
 
 module.exports = app;
